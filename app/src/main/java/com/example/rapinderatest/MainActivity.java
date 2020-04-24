@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Image");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
     }
 
     @Override
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.favorites_menu, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://jsonplaceholder.typicode.com/photos",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://jsonplaceholder.typicode.com/photos",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

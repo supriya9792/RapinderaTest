@@ -15,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -41,9 +44,16 @@ public class ImageInfoFragment extends Fragment {
         id = getArguments().getString("id");
         title = getArguments().getString("title");
         url = getArguments().getString("url");
-        Glide.with(getActivity()).load(thumbnailurl).placeholder(R.drawable.no).into(imageView);
 
-       txtTitle.setText(title);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.no);
+        requestOptions.error(R.drawable.no);
+
+        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(thumbnailurl).into(imageView);
+        //Picasso.with(getActivity()).load(thumbnailurl).networkPolicy(NetworkPolicy.NO_CACHE).into(imageView);
+
+
+        txtTitle.setText(title);
         return root;
     }
     @Override

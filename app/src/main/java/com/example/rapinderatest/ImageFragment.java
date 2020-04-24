@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,7 +61,11 @@ String albumid,id,url,title,thumbnailurl;
          id = getArguments().getString("id");
          title = getArguments().getString("title");
          url = getArguments().getString("url");
-        Glide.with(getActivity()).load(thumbnailurl).placeholder(R.drawable.no).into(imageView);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.no);
+        requestOptions.error(R.drawable.no);
+
+        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(thumbnailurl).into(imageView);
 
         return root;
 

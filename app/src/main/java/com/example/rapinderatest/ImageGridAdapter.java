@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +57,13 @@ public class ImageGridAdapter extends  RecyclerView.Adapter<ImageGridAdapter.MyV
 
         final ImageList enq = subList.get(position);
 
-       Glide.with(mContext).load(enq.getThumbnailurl()).placeholder(R.drawable.no).into(holder.image);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.no);
+        requestOptions.error(R.drawable.no);
 
+       Glide.with(mContext).setDefaultRequestOptions(requestOptions).load(enq.getThumbnailurl()).into(holder.image);
+
+       // Picasso.with(mContext).load(enq.getThumbnailurl()).networkPolicy(NetworkPolicy.NO_CACHE).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
